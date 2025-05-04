@@ -18,8 +18,8 @@ async function Home() {
     console.log("Current user:", user);
 
     const [userInterviews, allInterview] = await Promise.all([
-      getInterviewsByUserId(user?.id!),
-      getLatestInterviews({ userId: user?.id! }),
+      getInterviewsByUserId(user?.id || '')
+      getLatestInterviews({ userId: user?.id || '' }),
     ]);
 
     // Add console.log to verify interviews

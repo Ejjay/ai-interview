@@ -1,6 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var nextConfig = {
+const nextConfig = {
     /* config options here */
     // images: {
     //   remotePatterns: [
@@ -21,4 +20,5 @@ var nextConfig = {
         serverActions: true,
     },
 };
-exports.default = nextConfig;
+
+export default nextConfig;
