@@ -21,4 +21,4 @@ var nextConfig = {
         serverActions: {}, // Fixed: Changed from `true` to an empty object
     },
 };
-exports.default = nextConfig;
+module.exports = nextConfig;
