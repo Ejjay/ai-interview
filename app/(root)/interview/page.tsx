@@ -3,7 +3,6 @@ export const dynamic = 'force-dynamic'
 import Agent from "@/components/Agent";
 import { getCurrentUser } from "@/lib/actions/auth.action";
 import ErrorBoundary from '@/components/ErrorBoundary';
-import { Loader } from "@/components/ui/loader";
 
 const Page = async () => {
   const user = await getCurrentUser();
