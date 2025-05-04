@@ -140,6 +140,8 @@ export async function getInterviewsByUserId(
   userId: string
 ): Promise<Interview[] | null> {
   try {
+    console.log("Fetching interviews for user:", userId);
+
     if (!userId) {
       throw new Error("userId is required");
     }

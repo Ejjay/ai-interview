@@ -37,12 +37,18 @@ export async function POST(request: Request) {
       createdAt: new Date().toISOString(),
     };
 
+    // Add console.log to verify data
+    console.log("Saving interview:", interview);
+
     await db.collection("interviews").add(interview);
 
     return Response.json({ success: true }, { status: 200 });
   } catch (error) {
-    console.error("Error:", error);
-    return Response.json({ success: false, error: error }, { status: 500 });
+    console.error("Error generating interview:", error);
+    return Response.json(
+      { success: false, error: { message: error.message, stack: error.stack } },
+      { status: 500 }
+    );
   }
 }
 

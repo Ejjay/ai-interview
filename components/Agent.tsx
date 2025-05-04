@@ -40,8 +40,10 @@ const Agent = ({
       setCallStatus(CallStatus.ACTIVE);
     };
 
-    const onCallEnd = () => {
+    const onCallEnd = async () => {
       setCallStatus(CallStatus.FINISHED);
+      // Clean up resources
+      await vapi.stop();
     };
 
     const onMessage = (message: Message) => {
@@ -62,7 +64,10 @@ const Agent = ({
     };
 
     const onError = (error: Error) => {
-      console.log("Error:", error);
+      console.error('Vapi error:', error);
+      setCallStatus(CallStatus.INACTIVE);
+      // Add user-friendly error message
+      setLastMessage('There was an error with the call. Please try again.');
     };
 
     vapi.on("call-start", onCallStart);
@@ -73,12 +78,8 @@ const Agent = ({
     vapi.on("error", onError);
 
     return () => {
-      vapi.off("call-start", onCallStart);
-      vapi.off("call-end", onCallEnd);
-      vapi.off("message", onMessage);
-      vapi.off("speech-start", onSpeechStart);
-      vapi.off("speech-end", onSpeechEnd);
-      vapi.off("error", onError);
+      vapi.removeAllListeners();
+      vapi.stop();
     };
   }, []);
 
@@ -200,6 +201,7 @@ const Agent = ({
             <span
               className={cn(
                 "absolute animate-ping rounded-full opacity-75",
+                "animate-ping rounded-full opacity-75",
                 callStatus !== "CONNECTING" && "hidden"
               )}
             />
