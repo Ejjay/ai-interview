@@ -18,8 +18,8 @@ async function Home() {
     console.log("Current user:", user);
 
     const [userInterviews, allInterview] = await Promise.all([
-      getInterviewsByUserId(user?.id || '')
-      getLatestInterviews({ userId: user?.id || '' }),
+      getInterviewsByUserId(user?.id || ''),
+      getLatestInterviews({ userId: user?.id || '' }), // Fixed: Added missing comma
     ]);
 
     // Add console.log to verify interviews
